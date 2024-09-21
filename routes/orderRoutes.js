@@ -66,71 +66,23 @@ router.get('/:id', async (req, res) => {
 
 
 
-// Middleware to check if the user is authorized to access the order
-const checkOrderOwnership = async (req, res, next) => {
-    try {
-        const order = await Order.findById(req.params.id);
-        if (!order) {
-            return res.status(404).json({ error: 'Order not found' });
-        }
-        if (order.user.toString() !== req.user._id.toString()) {
-            return res.status(403).json({ error: 'Not authorized' });
-        }
-        next();
-    } catch (error) {
-        console.error('Error checking order ownership:', error);
-        res.status(500).json({ error: 'Server error' });
-    }
-};
-
-// Delete an order
-// DELETE order route
-// router.delete('/:id', async (req, res) => {
+// // Middleware to check if the user is authorized to access the order
+// const checkOrderOwnership = async (req, res, next) => {
 //     try {
-//       const order = await Order.findById(req.params.id);
-//       if (!order) {
-//         return res.status(404).json({ message: 'Order not found' });
-//       }
-  
-//       const userEmail = req.body.email; // Get the user's email from the request body (sent from frontend)
-      
-//       // Check if the logged-in user is the one who placed the order
-//       if (order.customer.email !== userEmail) {
-//         return res.status(403).json({ message: 'You can only delete your own orders' });
-//       }
-  
-//       await Order.findByIdAndDelete(req.params.id);
-//       res.status(200).json({ message: 'Order deleted successfully' });
+//         const order = await Order.findById(req.params.id);
+//         if (!order) {
+//             return res.status(404).json({ error: 'Order not found' });
+//         }
+//         if (order.user.toString() !== req.user._id.toString()) {
+//             return res.status(403).json({ error: 'Not authorized' });
+//         }
+//         next();
 //     } catch (error) {
-//       console.error('Error deleting order:', error);
-//       res.status(500).json({ message: 'Error deleting order' });
+//         console.error('Error checking order ownership:', error);
+//         res.status(500).json({ error: 'Server error' });
 //     }
-//   });
-  
+// };
 
-// Delete an order
-// DELETE order route
-// router.delete('/:id', async (req, res) => {
-//   try {
-//     const order = await Order.findById(req.params.id);
-//     if (!order) {
-//       return res.status(404).json({ message: 'Order not found' });
-//     }
-
-//     const userEmail = req.query.email; // Get the user's email from query parameters
-    
-//     // Check if the logged-in user is the one who placed the order
-//     if (order.customer.email !== userEmail) {
-//       return res.status(403).json({ message: 'You can only delete your own orders' });
-//     }
-
-//     await Order.findByIdAndDelete(req.params.id);
-//     res.status(200).json({ message: 'Order deleted successfully' });
-//   } catch (error) {
-//     console.error('Error deleting order:', error);
-//     res.status(500).json({ message: 'Error deleting order' });
-//   }
-// });
 
 
 router.delete('/:id', async (req, res) => {
