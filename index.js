@@ -35,23 +35,24 @@ mongoose.connect(MONGO_URI)
 app.use('/api/orders', orderRoutes); // Register the order routes
 
 
-
-// Function to delete orders older than 20 hours
 const deleteOldOrders = async () => {
   try {
-    const twentyHoursAgo = new Date(Date.now() - 20 * 60 * 60 * 1000); // 20 hours in milliseconds
-    await Order.deleteMany({ date: { $lt: twentyHoursAgo } });
-    console.log('Old orders deleted successfully');
+    const twelveHoursAgo = new Date(Date.now() - 12 * 60 * 60 * 1000); // 12 hours ago
+    const result = await Order.deleteMany({ date: { $lt: twelveHoursAgo } });
+    console.log(`Old orders deleted: ${result.deletedCount}`); // Use backticks for template literals
   } catch (error) {
     console.error('Error deleting old orders:', error);
   }
 };
 
-// Schedule the task to run every 20 hours
-cron.schedule('0 */20 * * *', () => {
+
+// Schedule the task to run every 12 hours
+cron.schedule('0 */12 * * *', () => {
   console.log('Running scheduled task to delete old orders...');
   deleteOldOrders();
 });
+
+
 
 app.use((req, res, next) => {
     console.log(`Received request for: ${req.originalUrl}`);
