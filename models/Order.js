@@ -38,7 +38,6 @@ const orderSchema = new mongoose.Schema({
     type: String,
     default: '' // Optional: default to empty string if no comment is provided
   },
-  requested: { type: Boolean, default: false }, // Ensure this is added
 });
 
 const Order = mongoose.model('Order', orderSchema);

@@ -88,43 +88,7 @@ router.delete('/:id', async (req, res) => {
 });
 
   
-router.patch('/:id', async (req, res) => {
-  const { requested } = req.body;
-  try {
-    const order = await Order.findByIdAndUpdate(req.params.id, { requested }, { new: true });
-    if (!order) {
-      return res.status(404).json({ message: 'Order not found' });
-    }
-    res.status(200).json(order);
-  } catch (error) {
-    res.status(500).json({ message: 'Error updating order', error });
-  }
-});
 
-
-// Get request status for all orders
-router.get('/order-request-status', async (req, res) => {
-  try {
-    const orders = await Order.find(); // Adjust as necessary to retrieve the specific order or status
-    const requestedStatus = orders.map(order => order.requested);
-    res.json({ requested: requestedStatus }); // Adjust this based on how you want to structure the response
-  } catch (error) {
-    console.error('Error fetching order request status:', error);
-    res.status(500).json({ message: 'Error fetching order request status' });
-  }
-});
-
-// Update order request globally
-router.post('/api/order-request', async (req, res) => {
-  const { requested } = req.body;
-  try {
-    await Order.updateMany({}, { requested }); // Update all orders or adjust as necessary
-    res.json({ success: true });
-  } catch (error) {
-    console.error('Error updating order request status:', error);
-    res.status(500).json({ message: 'Error updating order request status' });
-  }
-});
 
 
 module.exports = router;
