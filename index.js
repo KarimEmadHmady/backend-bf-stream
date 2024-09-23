@@ -34,7 +34,8 @@ mongoose.connect(MONGO_URI)
   
 // Use the routes
 app.use('/api/orders', orderRoutes); // Register the order routes
-app.use('/api/status', statusRoutes);
+app.use('/api/status', statusRoutes); // Register the status routes
+
 
 
 
