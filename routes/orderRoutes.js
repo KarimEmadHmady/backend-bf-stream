@@ -99,6 +99,20 @@ router.patch('/:id/requested', async (req, res) => {
   }
 });
 
+router.get('/order-request-status', async (req, res) => {
+  // Fetch the order request status from your database
+  const requestStatus = await Order.findOne(); // Adjust as necessary
+  res.json({ requested: requestStatus.requested });
+});
+
+router.post('/order-request', async (req, res) => {
+  const { requested } = req.body;
+  // Update the order request status in your database
+  await Order.updateOne({}, { requested }); // Adjust as necessary
+  res.json({ success: true });
+});
+
+
 
 module.exports = router;
 
