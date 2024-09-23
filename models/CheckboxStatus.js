@@ -1,4 +1,3 @@
-// models/CheckboxStatus.js
 const mongoose = require('mongoose');
 
 const checkboxStatusSchema = new mongoose.Schema({

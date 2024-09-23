@@ -4,9 +4,8 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 const orderRoutes = require('./routes/orderRoutes'); // Import your order routes
-const statusRoutes = require('./routes/statusRoutes'); // Import your order routes
 const Order = require('./models/Order'); // Adjust the path as necessary
-const userRoutes = require('./routes/userRoutes');
+const statusRoutes = require('./routes/statusRoutes');
 const cron = require('node-cron');
 
 
@@ -32,10 +31,10 @@ mongoose.connect(MONGO_URI)
   .then(() => console.log('MongoDB connected successfully'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-
+  
 // Use the routes
 app.use('/api/orders', orderRoutes); // Register the order routes
-app.use('/api/status', statusRoutes); // Register the order routes
+app.use('/api/status', statusRoutes);
 
 
 
