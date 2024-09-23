@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const Order = require('../models/Order');
+const CheckboxStatus = require('../models/CheckboxStatus');
 
 // Create a new order
 router.post('/', async (req, res) => {
@@ -89,6 +90,35 @@ router.delete('/:id', async (req, res) => {
 
   
 
+// Endpoint to update the checkbox status
+router.post('/update-status', async (req, res) => {
+  const { status } = req.body; // Expecting { status: boolean }
+
+  try {
+    let checkboxStatus = await CheckboxStatus.findOne();
+    
+    if (!checkboxStatus) {
+      checkboxStatus = new CheckboxStatus({ status });
+    } else {
+      checkboxStatus.status = status;
+    }
+
+    await checkboxStatus.save();
+    res.status(200).json(checkboxStatus);
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating status', error });
+  }
+});
+
+// Endpoint to get the current checkbox status
+router.get('/current-status', async (req, res) => {
+  try {
+    const checkboxStatus = await CheckboxStatus.findOne();
+    res.status(200).json(checkboxStatus || { status: false });
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching status', error });
+  }
+});
 
 
 module.exports = router;
