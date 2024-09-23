@@ -88,7 +88,7 @@ router.delete('/:id', async (req, res) => {
 });
 
   
-router.patch('/:id/requested', async (req, res) => {
+router.patch('/:id', async (req, res) => {
   const { requested } = req.body;
   try {
     const order = await Order.findByIdAndUpdate(req.params.id, { requested }, { new: true });
