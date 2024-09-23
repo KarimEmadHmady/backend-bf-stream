@@ -90,35 +90,34 @@ router.delete('/:id', async (req, res) => {
 
   
 
-// Endpoint to update the checkbox status
-router.post('/update-status', async (req, res) => {
-  const { status } = req.body; // Expecting { status: boolean }
+// GET current status
+router.get('/current-status', async (req, res) => {
+  try {
+    const status = await CheckboxStatus.findOne();
+    res.json({ status: status ? status.status : false });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to get status' });
+  }
+});
 
+// POST update status
+router.post('/update-status', async (req, res) => {
+  const { status } = req.body;
   try {
     let checkboxStatus = await CheckboxStatus.findOne();
-    
     if (!checkboxStatus) {
       checkboxStatus = new CheckboxStatus({ status });
     } else {
       checkboxStatus.status = status;
     }
-
     await checkboxStatus.save();
-    res.status(200).json(checkboxStatus);
+    res.json({ status: checkboxStatus.status });
   } catch (error) {
-    res.status(500).json({ message: 'Error updating status', error });
+    res.status(500).json({ error: 'Failed to update status' });
   }
 });
 
-// Endpoint to get the current checkbox status
-router.get('/current-status', async (req, res) => {
-  try {
-    const checkboxStatus = await CheckboxStatus.findOne();
-    res.status(200).json(checkboxStatus || { status: false });
-  } catch (error) {
-    res.status(500).json({ message: 'Error fetching status', error });
-  }
-});
+module.exports = router;
 
 
 module.exports = router;
