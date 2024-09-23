@@ -115,7 +115,7 @@ router.get('/order-request-status', async (req, res) => {
 });
 
 // Update order request globally
-router.post('/order-request', async (req, res) => {
+router.post('/api/order-request', async (req, res) => {
   const { requested } = req.body;
   try {
     await Order.updateMany({}, { requested }); // Update all orders or adjust as necessary
