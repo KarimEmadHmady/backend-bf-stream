@@ -1,5 +1,28 @@
 const mongoose = require('mongoose');
 
+// const orderSchema = new mongoose.Schema({
+//   items: [{ type: Object, required: true }],
+//   total: { type: Number, required: true },
+//   customer: {
+//     name: { type: String, required: true },
+//     email: { type: String, required: true }
+//   },
+//   user: {
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: 'User',
+//   },
+//   comment: { // Add the comment field
+//     type: String,
+//     default: '' // Optional: default to empty string if no comment is provided
+//   },
+//   requested: { type: Boolean, default: false }, // Add this line
+// });
+
+// const Order = mongoose.model('Order', orderSchema);
+
+// module.exports = Order;
+ 
+
 const orderSchema = new mongoose.Schema({
   items: [{ type: Object, required: true }],
   total: { type: Number, required: true },
@@ -15,11 +38,8 @@ const orderSchema = new mongoose.Schema({
     type: String,
     default: '' // Optional: default to empty string if no comment is provided
   },
-  requested: { type: Boolean, default: false }, // Add this line
+  requested: { type: Boolean, default: false }, // Ensure this is added
 });
 
 const Order = mongoose.model('Order', orderSchema);
-
 module.exports = Order;
- 
-
