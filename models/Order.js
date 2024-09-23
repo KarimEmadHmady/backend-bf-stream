@@ -15,7 +15,7 @@ const orderSchema = new mongoose.Schema({
     type: String,
     default: '' // Optional: default to empty string if no comment is provided
   },
-  date: { type: Date, default: Date.now }
+  requested: { type: Boolean, default: false }, // Add this line
 });
 
 const Order = mongoose.model('Order', orderSchema);

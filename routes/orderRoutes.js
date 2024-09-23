@@ -88,6 +88,16 @@ router.delete('/:id', async (req, res) => {
 });
 
   
+// Update order requested status
+router.patch('/:id/requested', async (req, res) => {
+  try {
+    const { requested } = req.body;
+    const updatedOrder = await Order.findByIdAndUpdate(req.params.id, { requested }, { new: true });
+    res.json(updatedOrder);
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating order' });
+  }
+});
 
 
 module.exports = router;
