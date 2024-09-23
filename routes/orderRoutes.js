@@ -64,27 +64,6 @@ router.get('/:id', async (req, res) => {
 });
 
 
-
-
-// // Middleware to check if the user is authorized to access the order
-// const checkOrderOwnership = async (req, res, next) => {
-//     try {
-//         const order = await Order.findById(req.params.id);
-//         if (!order) {
-//             return res.status(404).json({ error: 'Order not found' });
-//         }
-//         if (order.user.toString() !== req.user._id.toString()) {
-//             return res.status(403).json({ error: 'Not authorized' });
-//         }
-//         next();
-//     } catch (error) {
-//         console.error('Error checking order ownership:', error);
-//         res.status(500).json({ error: 'Server error' });
-//     }
-// };
-
-
-
 router.delete('/:id', async (req, res) => {
   try {
     const orderId = req.params.id;
