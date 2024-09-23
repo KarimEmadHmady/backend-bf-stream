@@ -7,7 +7,7 @@ const orderRoutes = require('./routes/orderRoutes'); // Import your order routes
 const Order = require('./models/Order'); // Adjust the path as necessary
 const userRoutes = require('./routes/userRoutes');
 const cron = require('node-cron');
-const buttonRoutes = require('./routes/buttonRoutes'); // Import button routes
+
 
 
 // Load environment variables
@@ -34,7 +34,7 @@ mongoose.connect(MONGO_URI)
 
 // Use the routes
 app.use('/api/orders', orderRoutes); // Register the order routes
-app.use('/api/button', buttonRoutes); // Register the button routes
+
 
 
 const deleteOldOrders = async () => {
