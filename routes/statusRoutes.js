@@ -32,3 +32,5 @@ router.get('/current-status', async (req, res) => {
       res.status(500).json({ error: 'Failed to update status' });
     }
   });
+
+  module.exports = router;
