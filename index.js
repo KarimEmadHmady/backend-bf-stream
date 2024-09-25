@@ -42,7 +42,7 @@ app.use('/api/status', statusRoutes); // Register the status routes
 
 const deleteOldOrders = async () => {
   try {
-    const twelveHoursAgo = new Date(Date.now() - 12 * 60 * 60 * 1000); // 12 hours ago
+    const twelveHoursAgo = new Date(Date.now() - 5 * 60 * 60 * 1000); // 12 hours ago
     const result = await Order.deleteMany({ date: { $lt: twelveHoursAgo } });
     console.log(`Old orders deleted: ${result.deletedCount}`); // Use backticks for template literals
   } catch (error) {
@@ -52,7 +52,7 @@ const deleteOldOrders = async () => {
 
 
 // Schedule the task to run every 12 hours
-cron.schedule('0 */12 * * *', () => {
+cron.schedule('0 */5 * * *', () => {
   console.log('Running scheduled task to delete old orders...');
   deleteOldOrders();
 });
