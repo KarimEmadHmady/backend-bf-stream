@@ -1,10 +1,13 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const checkboxStatusSchema = new mongoose.Schema({
-  status: {
-    type: Boolean,
-    default: false,
+const checkboxStatusSchema = new mongoose.Schema(
+  {
+    status: {
+      type: Boolean,
+      default: false,
+    },
   },
-}, { timestamps: true });
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('CheckboxStatus', checkboxStatusSchema);
+module.exports = mongoose.model("CheckboxStatus", checkboxStatusSchema);

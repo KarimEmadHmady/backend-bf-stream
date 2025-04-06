@@ -1,19 +1,19 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const CheckboxStatus = require('../models/CheckboxStatus');
+const CheckboxStatus = require("../models/CheckboxStatus");
 
 // GET current status
-router.get('/current-status', async (req, res) => {
+router.get("/current-status", async (req, res) => {
   try {
     const status = await CheckboxStatus.findOne();
     res.json({ status: status ? status.status : false });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to get status' });
+    res.status(500).json({ error: "Failed to get status" });
   }
 });
 
 // POST update status
-router.post('/update-status', async (req, res) => {
+router.post("/update-status", async (req, res) => {
   const { status } = req.body;
   try {
     let checkboxStatus = await CheckboxStatus.findOne();
@@ -25,7 +25,7 @@ router.post('/update-status', async (req, res) => {
     await checkboxStatus.save();
     res.json({ status: checkboxStatus.status });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to update status' });
+    res.status(500).json({ error: "Failed to update status" });
   }
 });
 
